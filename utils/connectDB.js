@@ -1,11 +1,13 @@
 // connectDB.js
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+
+dotenv.config(); // Load env variables
 
 const connectDB = async () => {
     try {
-        const conn = await mongoose.connect("mongodb://localhost:27017/peekaBoo");
-
-        console.log(`✅ MongoDB connected: ${conn.connection.host}`);
+        const conn = await mongoose.connect(process.env.MONGO_URI);
+        console.log(`✅ MongoDB Atlas connected: ${conn.connection.host}`);
     } catch (error) {
         console.error(`❌ MongoDB connection error: ${error.message}`);
         process.exit(1);
