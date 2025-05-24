@@ -21,7 +21,7 @@ app.use(express.json())
 app.use(cookieParser())
 app.use(express.urlencoded({ extended: true }));
 const corsOption={
-    origin: ["http://localhost:5174", "https://peekaboo-frontend1.onrender.com/"],
+    origin: "*",
     credentials:true,
 }
 app.use(cors(corsOption))
