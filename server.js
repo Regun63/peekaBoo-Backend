@@ -6,10 +6,13 @@ import userRoute from './routes/user.route.js';
 import postRoute from './routes/post.route.js';
 import messageRoute from './routes/message.route.js';
 import {app,server} from './socket/socket.js';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 // Call it before starting the server
 connectDB();
-
+const PORT = process.env.PORT || 5000;
 app.get("/",(_,res)=>{
     return res.status(200).json({
         message:"hey this is Sushmita here!",
@@ -21,7 +24,7 @@ app.use(express.json())
 app.use(cookieParser())
 app.use(express.urlencoded({ extended: true }));
 const corsOption={
-    origin: "*",
+   origin: process.env.CLIENT_URL,
     credentials:true,
 }
 app.use(cors(corsOption))
@@ -30,7 +33,7 @@ app.use('/api/peekaBoo/user',userRoute);
 app.use('/api/peekaBoo/post',postRoute);
 app.use('/api/peekaBoo/message',messageRoute);
 
-const PORT=5000;
+
 server.listen(PORT,()=>{
     console.log(`your server is running succcessfully at : http://localhost:${PORT}`);
 })
